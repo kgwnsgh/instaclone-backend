@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//client는 어떤 방식으로 데이터 베이스와 상호작용할지를 결정한다!
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//데이터 베이스에 주소와 종류에 대해서 알려준다
+//env 파일을 읽도록 되어있다
+
+model Movie {
+  id        Int      @id @default(autoincrement())
+  title     String
+  year      Int
+  genre     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+//npx prisma migrate dev --preview-feature 를 통해 migrations 생성
